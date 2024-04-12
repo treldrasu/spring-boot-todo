@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+        <title>ToDo APP</title>
+    </head>
+    <body>
+        <main class="container">
+            <div class="row" style="border: 1px solid black;">
+                EDIT FORMULAR
+                <p th:text="${todo}"></p>
+            </div>
+            <div class="row">
+              <div class="col border">
+                <form action="#" th:action="@{/todo/{id}(id = ${todo.get().id})}" th:method="put" th:object="${todo}">
+                  <div class="mb-3">
+                    <label for="beschreibung" class="form-label">Beschreibung:</label>
+                    <input id="beschreibung" type="text" th:field="*{beschreibung}" class="form-control"/>
+                  </div>
+                  <div class="mb-3">
+                    <label>Status:</label>
+                    <select id="status" name="status" class="form-select" aria-label="Status auswählen">
+                      <option th:value="true" th:text="Erledigt" th:selected="${todo.get().status}">Erledigt</option>
+                      <option th:value="false" th:text="Offen" th:selected="${!todo.get().status}">Offen</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Ändern</button>    
+                </form>
+              </div>
+            </div>
+        </main>
+        <!-- Scripts -->
+        <script src="/webjars/jquery/3.7.1/dist/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    </body>
+</html>

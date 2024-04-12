@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+        <title>ToDo APP</title>
+    </head>
+    <body>
+        <main class="container">
+            <div class="row m-3">
+                <div class="col">
+                  <form action="#" th:action="@{/todo}" th:method="post" th:object="${todo}" class="row g-3 align-items-center justify-content-center">
+                    <div class="col">
+                      <label for="beschreibung" class="visually-hidden">Beschreibung:</label>
+                      <div class="input-group">
+                          <input id="beschreibung" type="text" th:field="*{beschreibung}" class="form-control" placeholder="Neues ToDo"/>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Hinzufügen</button>    
+                    </div>
+                  </form>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">ID</th> -->
+                            <th scope="col">BESCHREIBUNG</th>
+                            <th scope="col">STATUS</th>
+                            <th scope="col">AKTIONEN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="todo : ${todoList}" th:class="${todo.status ? 'classe' : '' }" >
+                            <!-- <td th:text="${todo.id}"></td> -->
+                            <td th:text="${todo.beschreibung}"></td>
+                            <td th:text="${todo.status}"></td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <form th:action="@{/todo/{id}(id=${todo.id} ) }" th:method="delete">
+                                            <input class="btn btn-primary" type="submit" value="X">
+                                        </form>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a class="btn btn-primary" th:href="@{/todo/{id}(id=${todo.id} ) }">E</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <!-- Scripts -->
+        <script src="/webjars/jquery/3.7.1/dist/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    </body>
+</html>
